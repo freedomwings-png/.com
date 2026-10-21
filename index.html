@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREEDOM WINGS - Web Chính Thức</title>
+    <meta name="google-site-verification" content="vmkrc7FyPop-x0fFzYEyBf-tPB318VgQiuwjM7gEx9E" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gaming: {
+                            50: '#e6fcf5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                            neon: '#00ff66',
+                            dark: '#09090b',
+                            card: '#121214',
+                            border: '#27272a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+        .glow-neon {
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
+        }
+        .glow-neon-lg {
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.4);
+        }
+        .text-neon {
+            color: #00ff66;
+        }
+        .bg-neon {
+            background-color: #00ff66;
+        }
+        .border-neon {
+            border-color: #00ff66;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-emerald-500 selection:text-black">
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Custom Modal / Dialog Container -->
+    <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
+        <div id="modal-content" class="bg-gaming-card border border-gaming-border rounded-2xl w-full max-w-lg p-6 shadow-2xl transform transition-all">
+            <!-- Dynamic Modal Content -->
+        </div>
+    </div>
+
+    <!-- Top Announcement Bar / Header -->
+    <header class="sticky top-0 z-40 bg-gaming-dark/90 backdrop-blur-md border-b border-gaming-border">
+        <!-- Top Socials & Status Bar -->
+        <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center text-xs border-b border-gaming-border/50">
+            <div class="flex items-center gap-4 text-zinc-400 overflow-x-auto py-1">
+                <a href="mailto:freedomwings2025@gmail.com" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="Gmail">
+                    <i data-lucide="mail" class="w-3.5 h-3.5 text-gaming-neon"></i>
+                    <span class="hidden sm:inline">freedomwings2025@gmail.com</span>
+                </a>
+                <a href="https://discord.gg/7XyGU6gKxF" target="_blank" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="Discord 1">
+                    <i data-lucide="message-square" class="w-3.5 h-3.5 text-indigo-400"></i>
+                    <span>Discord 1</span>
+                </a>
+                <a href="https://discord.gg/58XRE4XJMG" target="_blank" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="Discord 2">
+                    <i data-lucide="message-square" class="w-3.5 h-3.5 text-indigo-400"></i>
+                    <span>Discord 2</span>
+                </a>
+                <a href="https://www.facebook.com/share/g/19U5nQdGu1/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="Facebook Group">
+                    <i data-lucide="facebook" class="w-3.5 h-3.5 text-blue-400"></i>
+                    <span class="hidden md:inline">FB Group</span>
+                </a>
+                <a href="https://www.tiktok.com/@freedom.wings.cla?_r=1&_t=ZS-9AiAuK4oERY" target="_blank" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="TikTok">
+                    <i data-lucide="video" class="w-3.5 h-3.5 text-pink-400"></i>
+                    <span class="hidden md:inline">TikTok</span>
+                </a>
+                <a href="https://youtube.com/@freedomwingsclandf?si=BnKNJArjbJlFzLUV" target="_blank" class="flex items-center gap-1.5 hover:text-gaming-neon transition-colors" title="YouTube">
+                    <i data-lucide="youtube" class="w-3.5 h-3.5 text-red-500"></i>
+                    <span class="hidden md:inline">YouTube</span>
+                </a>
+            </div>
+            <div id="auth-status-bar" class="flex items-center gap-3">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+
+        <!-- Main Navigation Bar -->
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-900 flex items-center justify-center font-black text-xl text-black glow-neon">
+                    🪽
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg sm:text-xl tracking-wider text-white flex items-center gap-2">
+                        FREEDOM WINGS
+                        <svg class="w-5 h-5 text-blue-400 inline" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </h1>
+                    <p class="text-xs text-gaming-neon font-medium">WEB CHÍNH THỨC 🔵</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation Tabs -->
+            <nav class="hidden xl:flex items-center gap-1 text-sm font-medium" id="desktop-nav">
+                <!-- Dynamically populated tabs -->
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button onclick="toggleMobileMenu()" class="xl:hidden p-2 text-zinc-400 hover:text-white rounded-lg bg-gaming-border/50">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="xl:hidden hidden bg-gaming-card border-b border-gaming-border px-4 py-4 space-y-2">
+            <!-- Dynamically populated mobile tabs -->
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+        <div id="tab-content" class="animate-fadeIn">
+            <!-- Tab content injected here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gaming-card border-t border-gaming-border mt-16 py-8 text-xs text-zinc-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center font-black text-black">FW</div>
+                <div>
+                    <p class="font-bold text-white text-sm">FREEDOM WINGS CLAN</p>
+                    <p>Bản quyền chính thức © 2026 Delta Force Gaming Community.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://beacons.page/htpgaming" target="_blank" class="hover:text-gaming-neon transition-colors">HTP GAMING BIO</a>
+                <a href="https://linkbio.co/hododi248play?utm_source=linkbio&utm_medium=profile_share" target="_blank" class="hover:text-gaming-neon transition-colors"> HODODI BIO </a>
+                <a href="#" onclick="switchTab('home')" class="hover:text-gaming-neon transition-colors">Về đầu trang</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // --- INITIALIZATION & STATE DATA ---
+        const ADMIN_USER = {
+            username: 'freedomwings2025',
+            password: 'FW20252026',
+            role: 'admin',
+            email: 'freedomwings2025@gmail.com',
+            name: 'HODODI',
+            uid: 'FW-ADMIN-001',
+            points: 9999,
+            avatar: 'https://placehold.co/150x150/10b981/09090b?text=ADMIN'
+        };
+
+        let dbState = {
+            currentUser: null, // null or user object
+            activeTab: 'home',
+            banners: [
+                { id: 1, title: 'FREEDOM WINGS - CHIẾN ĐẤU KHÔNG NGỪNG NGHỈ', subtitle: 'Gia nhập clan Delta Force chính thức số 1 Việt Nam', image: 'https://placehold.co/1200x500/064e3b/00ff66?text=FREEDOM+WINGS+BATTLEFIELD' },
+                { id: 2, title: 'TUYỂN THỦ & CONTENT CREATOR SĂN HỌC BỔNG', subtitle: 'Quyền lợi khủng, giải thưởng hàng tuần và tài nguyên độc quyền', image: 'https://placehold.co/1200x500/121214/10b981?text=TOURNAMENTS+%26+CREATORS' },
+                { id: 3, title: 'ĐỔI QUÀ ĐUA TOP - NHẬN SKIN CỰC CHẤT', subtitle: 'Tích điểm nhiệm vụ ngay hôm nay để đổi quà giá trị cao', image: 'https://placehold.co/1200x500/09090b/00ff66?text=REWARDS+SHOP' }
+            ],
+            announcements: [
+                { id: 1, date: '2026-06-06', title: 'Thông báo cập nhật quy định đổi tên clan bắt buộc: FW • Têningame', content: 'Tất cả thành viên chính thức bắt buộc phải đổi tên theo mẫu FW • Tên trước khi gắn UID Game. Ai không tuân thủ sẽ bị nhắc nhở và kick sau 48h.' },
+                { id: 2, date: '2026-06-05', title: 'Giải đấu nội bộ Delta Force mùa hè 2026 chính thức mở đăng ký tuyển thủ!', content: 'Truy cập mục Đăng ký hạng mục -> Tuyển thủ để điền đơn tham gia nhận thưởng tiền mặt và quà hiện vật.' }
+            ],
+            featuredServices: [
+                { id: 1, name: 'Cày Rank Siêu Tốc Chiến Trường', price: '150.000đ', desc: 'Đội ngũ Pro Player gánh rank an toàn tuyệt đối, không tool cheat.', image: 'https://placehold.co/400x250/121214/10b981?text=Rank+Boost' },
+                { id: 2, name: 'Dịch Vụ Train Kỹ Năng Bắn Súng', price: '100.000đ/h', desc: 'Hướng dẫn cụ thể tâm ngắm, recoil control, combat đỉnh cao.', image: 'https://placehold.co/400x250/121214/00ff66?text=Training' }
+            ],
+            featuredTasks: [
+                { id: 1, title: 'Chia sẻ video TikTok giới thiệu Clan', points: 50, req: 'Đăng video TikTok gắn hashtag #FreedomWings #DeltaForce kèm link', deadline: '2026-06-30', image: 'https://placehold.co/400x250/09090b/10b981?text=TikTok+Task' }
+            ],
+            tasks: [
+                { id: 1, title: 'Đăng video TikTok giới thiệu Clan', req: 'Đăng video TikTok gắn hashtag #FreedomWings #DeltaForce kèm link', points: 50, deadline: '2026-06-30', image: 'https://placehold.co/400x250/121214/10b981?text=TikTok' },
+                { id: 2, title: 'Like và Share bài viết Fanpage', req: 'Share bài ghim công khai trên Facebook cá nhân', points: 20, deadline: '2026-06-25', image: 'https://placehold.co/400x250/121214/00ff66?text=Facebook' },
+                { id: 3, title: 'Tham gia buổi Meeting Discord Clan', req: 'Điểm danh voice chat Discord lúc 20:00 Chủ Nhật', points: 30, deadline: '2026-06-28', image: 'https://placehold.co/400x250/121214/34d399?text=Discord' }
+            ],
+            rewards: [
+                { id: 1, name: 'Giftcode Delta Force Premium Skin', points: 200, qty: 10, image: 'https://placehold.co/400x250/121214/00ff66?text=Skin+Code' },
+                { id: 2, name: 'Thẻ cào Điện thoại 50.000đ', points: 500, qty: 5, image: 'https://placehold.co/400x250/121214/10b981?text=Card+50k' },
+                { id: 3, name: 'Áo thun độc quyền Freedom Wings', points: 1500, qty: 2, image: 'https://placehold.co/400x250/121214/34d399?text=FW+Shirt' }
+            ],
+            services: [
+                { id: 1, name: 'Cày Rank Siêu Tốc Chiến Trường', price: '150.000đ', desc: 'Đội ngũ Pro Player gánh rank an toàn tuyệt đối.', image: 'https://placehold.co/400x250/121214/10b981?text=Rank+Boost' },
+                { id: 2, name: 'Dịch Vụ Train Kỹ Năng Bắn Súng', price: '100.000đ/h', desc: 'Hướng dẫn cụ thể tâm ngắm, recoil control.', image: 'https://placehold.co/400x250/121214/00ff66?text=Training' },
+                { id: 3, name: 'Cày Sự Kiện Nhận Quà Giới Hạn', price: '200.000đ', desc: 'Hoàn thành mọi mốc event trong game nhanh chóng.', image: 'https://placehold.co/400x250/121214/34d399?text=Event+Clear' }
+            ],
+            users: [
+                ADMIN_USER,
+                {
+                    username: 'membertest',
+                    password: 'password123',
+                    role: 'THÀNH VIÊN',
+                    email: 'member@gmail.com',
+                    name: 'Nguyễn Văn Thành Viên',
+                    uid: 'FW-8888',
+                    points: 120,
+                    avatar: 'https://placehold.co/150x150/10b981/09090b?text=MEM',
+                    bankName: 'Techcombank',
+                    bankAccount: '19038888888888'
+                }
+            ],
+            applications: [], // Clan / Tuyển thủ registrations
+            taskSubmissions: [], // User task proofs
+            serviceOrders: [], // Service bookings
+            mailboxes: [
+                { id: 1, recipient: 'all', title: 'Chào mừng bạn đến với Freedom Wings!', content: 'Hãy đổi tên thành FW • Tên và tham gia làm nhiệm vụ ngay hôm nay.', date: '2026-06-01', sender: 'Admin' }
+            ],
+            userClaimedTasks: {}, // { username: [taskId1, taskId2] }
+            userRedeemedRewards: {} // { username: { rewardId: count } }
+        };
+
+        // Load data from localStorage if available
+        function loadState() {
+            const saved = localStorage.getItem('fw_clan_db_v1');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    dbState = { ...dbState, ...parsed };
+                } catch(e) { console.error('Load state error:', e); }
+            }
+            // Ensure admin is always present
+            if (!dbState.users.some(u => u.username === ADMIN_USER.username)) {
+                dbState.users.push(ADMIN_USER);
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('fw_clan_db_v1', JSON.stringify(dbState));
+        }
+
+        // --- TOAST NOTIFICATIONS ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emerald-900 border-emerald-500 text-emerald-100' : 'bg-red-900 border-red-500 text-red-100';
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl border ${bgClass} shadow-xl flex items-center gap-3 text-sm font-medium transition-all transform translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5 flex-shrink-0"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // --- MODAL CONTROLLER ---
+        function openModal(htmlContent) {
+            const modal = document.getElementById('modal-container');
+            const content = document.getElementById('modal-content');
+            content.innerHTML = htmlContent;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-container');
+            modal.classList.add('hidden');
+        }
+
+        // --- NAVIGATION TABS CONFIG ---
+        const TABS = [
+            { id: 'home', name: 'Trang chủ', icon: 'home' },
+            { id: 'categories', name: 'Đăng ký Clan', icon: 'user-plus' },
+            { id: 'tasks', name: 'Nhiệm vụ', icon: 'check-square' },
+            { id: 'rewards', name: 'Đổi quà', icon: 'gift' },
+            { id: 'services', name: 'Dịch vụ', icon: 'briefcase' },
+            { id: 'profile', name: 'Hồ sơ', icon: 'user' },
+            { id: 'mailbox', name: 'Hòm thư', icon: 'mail' },
+            { id: 'admin', name: 'Quản lý', icon: 'shield-alert', adminOnly: true }
+        ];
+
+        function switchTab(tabId) {
+            dbState.activeTab = tabId;
+            renderAll();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderAll() {
+            renderHeaderAuth();
+            renderNav();
+            renderTabContent();
+            lucide.createIcons();
+        }
+
+        function renderHeaderAuth() {
+            const bar = document.getElementById('auth-status-bar');
+            if (dbState.currentUser) {
+                bar.innerHTML = `
+                    <div class="flex items-center gap-2 cursor-pointer hover:opacity-80" onclick="switchTab('profile')">
+                        <img src="${dbState.currentUser.avatar || 'https://placehold.co/100'}" class="w-6 h-6 rounded-full object-cover border border-gaming-neon">
+                        <span class="text-white font-semibold">${dbState.currentUser.name || dbState.currentUser.username}</span>
+                        <span class="px-2 py-0.5 bg-emerald-500/20 text-gaming-neon text-[10px] rounded-full font-bold">${dbState.currentUser.role}</span>
+                        <span class="text-gaming-neon font-bold ml-1">${dbState.currentUser.points || 0} pts</span>
+                    </div>
+                    <button onclick="logout()" class="text-red-400 hover:text-red-300 ml-2 px-2 py-1 rounded bg-red-950/40 border border-red-900/50">Đăng xuất</button>
+                `;
+            } else {
+                bar.innerHTML = `
+                    <button onclick="openLoginModal()" class="px-3 py-1 bg-gaming-neon text-black font-bold rounded-lg hover:bg-emerald-400 transition-colors">Đăng nhập</button>
+                    <button onclick="openRegisterModal()" class="px-3 py-1 bg-gaming-border text-white font-medium rounded-lg hover:bg-zinc-700 transition-colors">Đăng ký</button>
+                `;
+            }
+        }
+
+        function renderNav() {
+            const desktopNav = document.getElementById('desktop-nav');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            let desktopHtml = '';
+            let mobileHtml = '';
+
+            TABS.forEach(tab => {
+                if (tab.adminOnly && (!dbState.currentUser || dbState.currentUser.role !== 'admin')) {
+                    return; // Hide admin tab if not admin
+                }
+                const active = dbState.activeTab === tab.id;
+                const activeClass = active ? 'bg-emerald-500/10 text-gaming-neon border border-emerald-500/30' : 'text-zinc-300 hover:text-white hover:bg-gaming-border/40';
+
+                desktopHtml += `
+                    <button onclick="switchTab('${tab.id}')" class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${activeClass}">
+                        <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
+                        <span>${tab.name}</span>
+                    </button>
+                `;
+                mobileHtml += `
+                    <button onclick="switchTab('${tab.id}'); toggleMobileMenu();" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeClass}">
+                        <i data-lucide="${tab.icon}" class="w-5 h-5"></i>
+                        <span>${tab.name}</span>
+                    </button>
+                `;
+            });
+
+            desktopNav.innerHTML = desktopHtml;
+            mobileMenu.innerHTML = mobileHtml;
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- TAB ROUTING RENDEREERS ---
+        function renderTabContent() {
+            const container = document.getElementById('tab-content');
+            switch(dbState.activeTab) {
+                case 'home':
+                    container.innerHTML = renderHomeTab();
+                    initBannerSlider();
+                    break;
+                case 'categories':
+                    container.innerHTML = renderCategoriesTab();
+                    break;
+                case 'tasks':
+                    container.innerHTML = renderTasksTab();
+                    break;
+                case 'rewards':
+                    container.innerHTML = renderRewardsTab();
+                    break;
+                case 'services':
+                    container.innerHTML = renderServicesTab();
+                    break;
+                case 'profile':
+                    container.innerHTML = renderProfileTab();
+                    break;
+                case 'mailbox':
+                    container.innerHTML = renderMailboxTab();
+                    break;
+                case 'admin':
+                    if (!dbState.currentUser || dbState.currentUser.role !== 'admin') {
+                        container.innerHTML = `<div class="text-center py-20 text-red-400 font-bold text-xl">Truy cập bị từ chối. Chỉ tài khoản Admin mới được sử dụng mục này.</div>`;
+                    } else {
+                        container.innerHTML = renderAdminTab();
+                    }
+                    break;
+                default:
+                    container.innerHTML = `<div class="text-center py-20">Trang không tồn tại</div>`;
+            }
+            lucide.createIcons();
+        }
+
+        // --- 1. TRANG CHỦ ---
+        let currentBannerIndex = 0;
+        let bannerTimer = null;
+
+        function renderHomeTab() {
+            const isAdmin = dbState.currentUser && dbState.currentUser.role === 'admin';
+            const b = dbState.banners[currentBannerIndex] || dbState.banners[0];
+
+            return `
+                <div class="space-y-10">
+                    <!-- 1.1 Banner Section -->
+                    <div class="relative rounded-2xl overflow-hidden border border-gaming-border shadow-2xl bg-gaming-card group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+                        <img id="banner-img" src="${b.image}" class="w-full h-72 sm:h-96 object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/1200x500/09090b/10b981?text=BANNER'">
+                        <div class="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                            <div>
+                                <span class="px-3 py-1 bg-gaming-neon text-black text-xs font-black rounded-full mb-2 inline-block">FREEDOM WINGS BANNER</span>
+                                <h2 id="banner-title" class="text-2xl sm:text-3xl font-black text-white">${b.title}</h2>
+                                <p id="banner-subtitle" class="text-sm sm:text-base text-zinc-300 mt-1">${b.subtitle}</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="prevBanner()" class="p-2 bg-black/60 hover:bg-gaming-neon hover:text-black rounded-xl text-white backdrop-blur-md transition-colors"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                                <span class="text-xs text-zinc-400 font-bold">${currentBannerIndex + 1} / ${dbState.banners.length}</span>
+                                <button onclick="nextBanner()" class="p-2 bg-black/60 hover:bg-gaming-neon hover:text-black rounded-xl text-white backdrop-blur-md transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                            </div>
+                        </div>
+
+                        ${isAdmin ? `
+                            <div class="absolute top-4 right-4 z-30 flex gap-2">
+                                <button onclick="openAddBannerModal()" class="px-3 py-1.5 bg-gaming-neon text-black font-bold text-xs rounded-xl flex items-center gap-1 shadow-lg hover:bg-emerald-400"><i data-lucide="plus" class="w-4 h-4"></i> Thêm banner</button>
+                                <button onclick="removeCurrentBanner()" class="px-3 py-1.5 bg-red-600 text-white font-bold text-xs rounded-xl flex items-center gap-1 shadow-lg hover:bg-red-500"><i data-lucide="minus" class="w-4 h-4"></i> Xóa banner này</button>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- 1.2 Thông báo Section -->
+                    <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-gaming-neon flex items-center justify-center">
+                                    <i data-lucide="bell" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">BẢNG THÔNG BÁO CLAN</h3>
+                                    <p class="text-xs text-zinc-400">Cập nhật tin tức quan trọng từ ban quản trị</p>
+                                </div>
+                            </div>
+                            ${isAdmin ? `
+                                <button onclick="openAddAnnouncementModal()" class="px-3.5 py-2 bg-gaming-neon text-black font-bold text-xs rounded-xl flex items-center gap-1.5 hover:bg-emerald-400 shadow-lg">
+                                    <i data-lucide="plus" class="w-4 h-4"></i> Thêm thông báo
+                                </button>
+                            ` : ''}
+                        </div>
+                        <div class="space-y-4">
+                            ${dbState.announcements.map(ann => `
+                                <div class="relative bg-gaming-dark border border-gaming-border rounded-xl p-5 hover:border-gaming-neon/50 transition-colors">
+                                    ${isAdmin ? `
+                                        <button onclick="removeAnnouncement(${ann.id})" class="absolute top-4 right-4 px-2.5 py-1 bg-red-600/80 hover:bg-red-600 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow">
+                                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Xóa thông báo
+                                        </button>
+                                    ` : ''}
+                                    <div class="flex items-center gap-2 text-xs text-gaming-neon font-semibold mb-1">
+                                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                                        <span>${ann.date}</span>
+                                    </div>
+                                    <h4 class="text-base font-bold text-white mb-2 pr-24">${ann.title}</h4>
+                                    <p class="text-sm text-zinc-300 leading-relaxed">${ann.content}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- 1.3 & 1.4 Dịch vụ nổi bật & Nhiệm vụ nổi bật -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Dịch vụ nổi bật -->
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
+                                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">DỊCH VỤ NỔI BẬT</h3>
+                                    <p class="text-xs text-zinc-400">Các dịch vụ được clan ghim ưu tiên</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                ${dbState.featuredServices.map(srv => `
+                                    <div class="flex gap-4 items-center bg-gaming-dark border border-gaming-border rounded-xl p-4 hover:border-blue-500/50 transition-colors">
+                                        <img src="${srv.image}" class="w-20 h-20 rounded-lg object-cover flex-shrink-0 border border-gaming-border">
+                                        <div class="flex-grow">
+                                            <h4 class="font-bold text-white text-sm">${srv.name}</h4>
+                                            <p class="text-xs text-zinc-400 mt-1 line-clamp-1">${srv.desc}</p>
+                                            <div class="mt-2 flex justify-between items-center">
+                                                <span class="text-gaming-neon font-extrabold text-sm">${srv.price}</span>
+                                                <button onclick="switchTab('services')" class="px-3 py-1 bg-gaming-border hover:bg-gaming-neon hover:text-black text-white text-xs font-bold rounded-lg transition-colors">Thuê ngay</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Nhiệm vụ nổi bật -->
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                                    <i data-lucide="award" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">NHIỆM VỤ NỔI BẬT</h3>
+                                    <p class="text-xs text-zinc-400">Nhiệm vụ thưởng điểm cao đang hot</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                ${dbState.featuredTasks.map(tsk => `
+                                    <div class="flex gap-4 items-center bg-gaming-dark border border-gaming-border rounded-xl p-4 hover:border-amber-500/50 transition-colors">
+                                        <img src="${tsk.image}" class="w-20 h-20 rounded-lg object-cover flex-shrink-0 border border-gaming-border">
+                                        <div class="flex-grow">
+                                            <h4 class="font-bold text-white text-sm">${tsk.title}</h4>
+                                            <p class="text-xs text-zinc-400 mt-1 line-clamp-1">${tsk.req}</p>
+                                            <div class="mt-2 flex justify-between items-center">
+                                                <span class="text-amber-400 font-extrabold text-sm">+${tsk.points} điểm</span>
+                                                <button onclick="switchTab('tasks')" class="px-3 py-1 bg-gaming-border hover:bg-amber-500 hover:text-black text-white text-xs font-bold rounded-lg transition-colors">Nhận việc</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initBannerSlider() {
+            if (bannerTimer) clearInterval(bannerTimer);
+            bannerTimer = setInterval(() => {
+                currentBannerIndex = (currentBannerIndex + 1) % dbState.banners.length;
+                const img = document.getElementById('banner-img');
+                const title = document.getElementById('banner-title');
+                const subtitle = document.getElementById('banner-subtitle');
+                if (img && title && subtitle) {
+                    const b = dbState.banners[currentBannerIndex];
+                    img.src = b.image;
+                    title.textContent = b.title;
+                    subtitle.textContent = b.subtitle;
+                }
+            }, 6000);
+        }
+
+        function nextBanner() {
+            currentBannerIndex = (currentBannerIndex + 1) % dbState.banners.length;
+            renderAll();
+        }
+
+        function prevBanner() {
+            currentBannerIndex = (currentBannerIndex - 1 + dbState.banners.length) % dbState.banners.length;
+            renderAll();
+        }
+
+        function openAddBannerModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="text-gaming-neon"></i> Thêm Banner Mới</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tiêu đề Banner</label>
+                        <input type="text" id="new-b-title" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nhập tiêu đề...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Phụ đề</label>
+                        <input type="text" id="new-b-sub" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nhập phụ đề...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Banner</label>
+                        <input type="text" id="new-b-img" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://placehold.co/1200x500/...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-4">
+                        <button onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button onclick="submitAddBanner()" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Thêm ngay</button>
+                    </div>
+                </div>
+            `);
+        }
+
+        function submitAddBanner() {
+            const title = document.getElementById('new-b-title').value.trim();
+            const subtitle = document.getElementById('new-b-sub').value.trim();
+            const image = document.getElementById('new-b-img').value.trim();
+            if (!title || !image) {
+                showToast('Vui lòng điền đầy đủ tiêu đề và link ảnh', 'error');
+                return;
+            }
+            dbState.banners.push({ id: Date.now(), title, subtitle, image });
+            saveState();
+            closeModal();
+            showToast('Đã thêm banner thành công!');
+            renderAll();
+        }
+
+        function removeCurrentBanner() {
+            if (dbState.banners.length <= 1) {
+                showToast('Phải giữ lại ít nhất 1 banner!', 'error');
+                return;
+            }
+            dbState.banners.splice(currentBannerIndex, 1);
+            currentBannerIndex = 0;
+            saveState();
+            showToast('Đã xóa banner!');
+            renderAll();
+        }
+
+        function openAddAnnouncementModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="bell" class="text-gaming-neon"></i> Thêm Thông Báo Mới</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tiêu đề thông báo</label>
+                        <input type="text" id="new-ann-title" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tiêu đề...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Nội dung chi tiết</label>
+                        <textarea id="new-ann-content" rows="4" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nội dung thông báo..."></textarea>
+                    </div>
+                    <div class="flex justify-end gap-3 pt-4">
+                        <button onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button onclick="submitAddAnnouncement()" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Đăng thông báo</button>
+                    </div>
+                </div>
+            `);
+        }
+
+        function submitAddAnnouncement() {
+            const title = document.getElementById('new-ann-title').value.trim();
+            const content = document.getElementById('new-ann-content').value.trim();
+            if (!title || !content) {
+                showToast('Vui lòng điền đủ tiêu đề và nội dung', 'error');
+                return;
+            }
+            const dateStr = new Date().toISOString().split('T')[0];
+            dbState.announcements.unshift({ id: Date.now(), date: dateStr, title, content });
+            saveState();
+            closeModal();
+            showToast('Đã đăng thông báo thành công!');
+            renderAll();
+        }
+
+        function removeAnnouncement(id) {
+            dbState.announcements = dbState.announcements.filter(a => a.id !== id);
+            saveState();
+            showToast('Đã xóa thông báo!');
+            renderAll();
+        }
+
+
+        // --- 2. ĐĂNG KÝ CÁC HẠNG MỤC CỦA CLAN ---
+        // Stored illustrations for categories
+        if (!dbState.categoryImages) {
+            dbState.categoryImages = {
+                clan: 'https://placehold.co/600x400/064e3b/00ff66?text=DANG+KY+CLAN',
+                proplayer: 'https://placehold.co/600x400/121214/10b981?text=DANG+KY+TUYEN+THU',
+                creator: 'https://placehold.co/600x400/09090b/34d399?text=CONTENT+CREATOR'
+            };
+        }
+
+        function renderCategoriesTab() {
+            const isAdmin = dbState.currentUser && dbState.currentUser.role === 'admin';
+
+            return `
+                <div class="space-y-12">
+                    <div class="text-center max-w-2xl mx-auto">
+                        <span class="px-3 py-1 bg-gaming-neon/10 text-gaming-neon border border-gaming-neon/30 text-xs font-black rounded-full uppercase tracking-wider">Hệ thống tuyển dụng chính thức</span>
+                        <h2 class="text-2xl sm:text-4xl font-black text-white mt-3">ĐĂNG KÝ CÁC HẠNG MỤC CLAN</h2>
+                        <p class="text-sm text-zinc-400 mt-2">Lựa chọn hạng mục phù hợp để gia nhập gia đình Freedom Wings. Yêu cầu bắt buộc đổi tên ingame trước khi nộp đơn.</p>
+                    </div>
+
+                    <!-- 3 Category Cards -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- 1. ĐĂNG KÝ CLAN -->
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                            <div class="relative h-48 overflow-hidden bg-gaming-dark">
+                                <img src="${dbState.categoryImages.clan}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                ${isAdmin ? `
+                                    <button onclick="editCategoryImage('clan')" class="absolute top-3 right-3 px-2.5 py-1 bg-black/80 hover:bg-gaming-neon hover:text-black text-white rounded-lg text-xs font-bold backdrop-blur-md transition-colors flex items-center gap-1">
+                                        <i data-lucide="edit" class="w-3.5 h-3.5"></i> Sửa ảnh
+                                    </button>
+                                ` : ''}
+                                <span class="absolute bottom-3 left-3 px-3 py-1 bg-emerald-500 text-black text-xs font-black rounded-full">THÀNH VIÊN CLAN</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white mb-2">Gia Nhập Clan Chính Thức</h3>
+                                    <ul class="text-xs text-zinc-300 space-y-1.5">
+                                        <li>• Yêu cầu bắt buộc đổi tên: <strong class="text-gaming-neon">FW • name</strong></li>
+                                        <li>• Cung cấp UID Game & ảnh ingame sau khi đổi tên</li>
+                                        <li>• Tham gia Discord clan bắt buộc</li>
+                                    </ul>
+                                </div>
+                                <button onclick="openClanRegisterForm()" class="w-full py-3 bg-gaming-neon hover:bg-emerald-400 text-black font-extrabold rounded-xl text-sm transition-colors shadow-lg">
+                                    Đăng Ký Clan Ngay
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 2. ĐĂNG KÝ TUYỂN THỦ -->
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                            <div class="relative h-48 overflow-hidden bg-gaming-dark">
+                                <img src="${dbState.categoryImages.proplayer}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                ${isAdmin ? `
+                                    <button onclick="editCategoryImage('proplayer')" class="absolute top-3 right-3 px-2.5 py-1 bg-black/80 hover:bg-gaming-neon hover:text-black text-white rounded-lg text-xs font-bold backdrop-blur-md transition-colors flex items-center gap-1">
+                                        <i data-lucide="edit" class="w-3.5 h-3.5"></i> Sửa ảnh
+                                    </button>
+                                ` : ''}
+                                <span class="absolute bottom-3 left-3 px-3 py-1 bg-blue-500 text-white text-xs font-black rounded-full">TUYỂN THỦ ESPORTS</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white mb-2">Đăng Ký Tuyển Thủ Thi Đấu</h3>
+                                    <ul class="text-xs text-zinc-300 space-y-1.5">
+                                        <li>• Tên ingame: <strong class="text-blue-400">FW • name</strong></li>
+                                        <li>• Chọn thiết bị (PC / Mobile) & chế độ thi đấu</li>
+                                        <li>• Lương thưởng & tài trợ giải đấu hấp dẫn</li>
+                                    </ul>
+                                </div>
+                                <button onclick="openProPlayerRegisterForm()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-extrabold rounded-xl text-sm transition-colors shadow-lg">
+                                    Đăng Ký Tuyển Thủ
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3. ĐĂNG KÝ CONTENT CREATOR -->
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col group">
+                            <div class="relative h-48 overflow-hidden bg-gaming-dark">
+                                <img src="${dbState.categoryImages.creator}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                ${isAdmin ? `
+                                    <button onclick="editCategoryImage('creator')" class="absolute top-3 right-3 px-2.5 py-1 bg-black/80 hover:bg-gaming-neon hover:text-black text-white rounded-lg text-xs font-bold backdrop-blur-md transition-colors flex items-center gap-1">
+                                        <i data-lucide="edit" class="w-3.5 h-3.5"></i> Sửa ảnh
+                                    </button>
+                                ` : ''}
+                                <span class="absolute bottom-3 left-3 px-3 py-1 bg-pink-500 text-white text-xs font-black rounded-full">CONTENT CREATOR</span>
+                            </div>
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white mb-2">Đăng Ký Sáng Tạo Nội Dung</h3>
+                                    <ul class="text-xs text-zinc-300 space-y-1.5">
+                                        <li>• Nhận hỗ trợ tài nguyên từ nhà phát hành</li>
+                                        <li>• Link gia nhập chính thức Garena Creator Hub</li>
+                                        <li>• Nhận giftcode độc quyền phát cho cộng đồng</li>
+                                    </ul>
+                                </div>
+                                <a href="https://creator.deltaforce.garena.com" target="_blank" class="w-full py-3 bg-pink-600 hover:bg-pink-500 text-white font-extrabold rounded-xl text-sm transition-colors shadow-lg text-center inline-block">
+                                    Đến Link Garena Creator ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function editCategoryImage(type) {
+            const url = prompt('Nhập URL ảnh minh họa mới:', dbState.categoryImages[type] || '');
+            if (url) {
+                dbState.categoryImages[type] = url;
+                saveState();
+                showToast('Đã cập nhật ảnh minh họa!');
+                renderAll();
+            }
+        }
+
+        function openClanRegisterForm() {
+            if (!dbState.currentUser) {
+                showToast('Vui lòng đăng nhập trước khi nộp đơn đăng ký!', 'error');
+                openLoginModal();
+                return;
+            }
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="user-plus" class="text-gaming-neon"></i> Đăng Ký Gia Nhập Clan</h3>
+                <form onsubmit="submitClanApp(event)" class="space-y-4">
+                    <div class="bg-emerald-950/40 border border-emerald-500/30 p-3 rounded-xl text-xs text-emerald-200">
+                        Lưu ý: Bạn bắt buộc phải đổi tên thành <strong>FW • name</strong> trước khi điền UID Game và gửi đơn.
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Họ & Tên</label>
+                        <input type="text" id="app-clan-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${dbState.currentUser.name || ''}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">UID Game (Đã đổi tên FW • name)</label>
+                        <input type="text" id="app-clan-uid" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="VD: FW • Sniper99">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Gmail cá nhân</label>
+                        <input type="email" id="app-clan-email" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${dbState.currentUser.email || ''}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link hoặc URL ảnh Ingame sau khi đổi tên</label>
+                        <input type="text" id="app-clan-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://placehold.co/600x400/... hoặc link ảnh">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Discord Clan</label>
+                        <input type="text" readonly class="w-full bg-gaming-dark/60 border border-gaming-border rounded-xl px-4 py-2.5 text-gaming-neon text-sm outline-none" value="https://discord.gg/JzTVcpjtSw">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Gửi Đơn Đăng Ký</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitClanApp(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('app-clan-name').value;
+            const uidGame = document.getElementById('app-clan-uid').value;
+            const email = document.getElementById('app-clan-email').value;
+            const ingameImg = document.getElementById('app-clan-img').value;
+
+            const newApp = {
+                id: Date.now(),
+                type: 'ĐĂNG KÝ CLAN',
+                username: dbState.currentUser.username,
+                fullName,
+                uidGame,
+                email,
+                ingameImg,
+                date: new Date().toLocaleString(),
+                status: 'pending'
+            };
+
+            dbState.applications.push(newApp);
+            saveState();
+            closeModal();
+            showToast('Gửi đơn đăng ký Clan thành công! Admin sẽ duyệt sớm.');
+        }
+
+        function openProPlayerRegisterForm() {
+            if (!dbState.currentUser) {
+                showToast('Vui lòng đăng nhập trước khi nộp đơn đăng ký!', 'error');
+                openLoginModal();
+                return;
+            }
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="shield" class="text-blue-400"></i> Đăng Ký Tuyển Thủ Esports</h3>
+                <form onsubmit="submitProApp(event)" class="space-y-4">
+                    <div class="bg-blue-950/40 border border-blue-500/30 p-3 rounded-xl text-xs text-blue-200">
+                        Lưu ý: Bắt buộc đổi tên thành <strong>FW • name</strong> trước khi gửi đơn tuyển thủ.
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Họ & Tên</label>
+                        <input type="text" id="app-pro-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${dbState.currentUser.name || ''}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">UID Game (FW • name)</label>
+                        <input type="text" id="app-pro-uid" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="VD: FW • ProPlayer">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Gmail</label>
+                            <input type="email" id="app-pro-email" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${dbState.currentUser.email || ''}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số điện thoại (SĐT)</label>
+                            <input type="tel" id="app-pro-phone" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="0912345678">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Thiết bị thi đấu (Chọn nhiều)</label>
+                        <div class="flex gap-4 mt-1">
+                            <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer"><input type="checkbox" name="device" value="Máy tính" class="accent-emerald-500 w-4 h-4"> Máy tính (PC)</label>
+                            <label class="flex items-center gap-2 text-sm text-zinc-300 cursor-pointer"><input type="checkbox" name="device" value="Điện thoại" class="accent-emerald-500 w-4 h-4"> Điện thoại (Mobile)</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Chế độ thi đấu (Chọn nhiều)</label>
+                        <div class="grid grid-cols-3 gap-2 mt-1">
+                            <label class="flex items-center gap-2 text-xs text-zinc-300 cursor-pointer"><input type="checkbox" name="mode" value="CHIẾN TRƯỜNG" class="accent-emerald-500 w-4 h-4"> Chiến Trường</label>
+                            <label class="flex items-center gap-2 text-xs text-zinc-300 cursor-pointer"><input type="checkbox" name="mode" value="CHIẾN DỊCH" class="accent-emerald-500 w-4 h-4"> Chiến Dịch</label>
+                            <label class="flex items-center gap-2 text-xs text-zinc-300 cursor-pointer"><input type="checkbox" name="mode" value="KÍCH NỔ" class="accent-emerald-500 w-4 h-4"> Kích Nổ</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link ảnh Ingame sau khi đổi tên</label>
+                        <input type="text" id="app-pro-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Link ảnh minh chứng">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Discord Clan</label>
+                        <input type="text" readonly class="w-full bg-gaming-dark/60 border border-gaming-border rounded-xl px-4 py-2.5 text-gaming-neon text-sm outline-none" value="https://discord.gg/JzTVcpjtSw">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Gửi Đơn Tuyển Thủ</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitProApp(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('app-pro-name').value;
+            const uidGame = document.getElementById('app-pro-uid').value;
+            const email = document.getElementById('app-pro-email').value;
+            const phone = document.getElementById('app-pro-phone').value;
+            const ingameImg = document.getElementById('app-pro-img').value;
+
+            const devices = Array.from(document.querySelectorAll('input[name="device"]:checked')).map(el => el.value);
+            const modes = Array.from(document.querySelectorAll('input[name="mode"]:checked')).map(el => el.value);
+
+            if (devices.length === 0 || modes.length === 0) {
+                showToast('Vui lòng chọn ít nhất 1 thiết bị và 1 chế độ thi đấu', 'error');
+                return;
+            }
+
+            const newApp = {
+                id: Date.now(),
+                type: 'ĐĂNG KÝ TUYỂN THỦ',
+                username: dbState.currentUser.username,
+                fullName,
+                uidGame,
+                email,
+                phone,
+                devices: devices.join(', '),
+                modes: modes.join(', '),
+                ingameImg,
+                date: new Date().toLocaleString(),
+                status: 'pending'
+            };
+
+            dbState.applications.push(newApp);
+            saveState();
+            closeModal();
+            showToast('Gửi đơn tuyển thủ thành công! Quản trị viên sẽ xem xét.');
+        }
+
+
+        // --- 3. NHIỆM VỤ ---
+        function renderTasksTab() {
+            const isAdmin = dbState.currentUser && dbState.currentUser.role === 'admin';
+            const user = dbState.currentUser;
+
+            return `
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl">
+                        <div>
+                            <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-black rounded-full uppercase">Hệ thống cày điểm</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mt-2">NHIỆM VỤ THÀNH VIÊN</h2>
+                            <p class="text-xs sm:text-sm text-zinc-400 mt-1">Hoàn thành nhiệm vụ, nộp link minh chứng để nhận điểm thưởng đổi quà.</p>
+                        </div>
+                        <div class="flex items-center gap-3 w-full md:w-auto">
+                            <div class="relative flex-grow md:w-64">
+                                <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-zinc-400"></i>
+                                <input type="text" id="task-search" oninput="filterTasks()" placeholder="Tìm nhiệm vụ..." class="w-full bg-gaming-dark border border-gaming-border rounded-xl pl-9 pr-4 py-2 text-sm text-white focus:border-gaming-neon outline-none">
+                            </div>
+                            ${isAdmin ? `
+                                <button onclick="openAddTaskModal()" class="px-4 py-2 bg-gaming-neon text-black font-extrabold text-xs rounded-xl flex items-center gap-1.5 hover:bg-emerald-400 shadow-lg flex-shrink-0">
+                                    <i data-lucide="plus" class="w-4 h-4"></i> Thêm nhiệm vụ
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Tasks Grid -->
+                    <div id="tasks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${dbState.tasks.map(task => {
+                            const claimedMap = dbState.userClaimedTasks[user?.username] || [];
+                            const isClaimed = claimedMap.includes(task.id);
+                            return `
+                                <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group">
+                                    <div>
+                                        <div class="relative h-44 overflow-hidden bg-gaming-dark">
+                                            <img src="${task.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <div class="absolute top-3 left-3 px-3 py-1 bg-amber-500 text-black text-xs font-black rounded-full shadow">
+                                                +${task.points} điểm
+                                            </div>
+                                            ${isAdmin ? `
+                                                <div class="absolute top-3 right-3 flex gap-1.5">
+                                                    <button onclick="openEditTaskModal(${task.id})" class="p-1.5 bg-black/80 hover:bg-blue-600 text-white rounded-lg text-xs" title="Sửa"><i data-lucide="edit" class="w-3.5 h-3.5"></i></button>
+                                                    <button onclick="deleteTask(${task.id})" class="p-1.5 bg-black/80 hover:bg-red-600 text-white rounded-lg text-xs" title="Xóa"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                        <div class="p-5 space-y-3">
+                                            <h3 class="font-bold text-white text-base">${task.title}</h3>
+                                            <p class="text-xs text-zinc-300 leading-relaxed">${task.req}</p>
+                                            <div class="flex items-center gap-2 text-xs text-zinc-400">
+                                                <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i>
+                                                <span>Hạn kết thúc: ${task.deadline}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 pt-0">
+                                        ${isClaimed ? `
+                                            <button disabled class="w-full py-2.5 bg-zinc-800 text-zinc-500 text-xs font-bold rounded-xl cursor-not-allowed">Đã nhận nhiệm vụ này</button>
+                                        ` : `
+                                            <button onclick="openSubmitTaskModal(${task.id})" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-black text-xs font-extrabold rounded-xl transition-colors shadow-lg">
+                                                Nhận & Nộp Link Nhiệm Vụ
+                                            </button>
+                                        `}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterTasks() {
+            const keyword = document.getElementById('task-search').value.toLowerCase();
+            const grid = document.getElementById('tasks-grid');
+            const cards = grid.children;
+            
+            dbState.tasks.forEach((task, idx) => {
+                const match = task.title.toLowerCase().includes(keyword) || task.req.toLowerCase().includes(keyword);
+                if (cards[idx]) {
+                    cards[idx].style.display = match ? 'flex' : 'none';
+                }
+            });
+        }
+
+        function openAddTaskModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="text-gaming-neon"></i> Thêm Nhiệm Vụ Mới</h3>
+                <form onsubmit="submitAddTask(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên nhiệm vụ</label>
+                        <input type="text" id="t-title" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tên nhiệm vụ...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Yêu cầu nhiệm vụ</label>
+                        <textarea id="t-req" required rows="2" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Yêu cầu cụ thể..."></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số điểm thưởng</label>
+                            <input type="number" id="t-points" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Thời gian kết thúc</label>
+                            <input type="date" id="t-deadline" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="t-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://placehold.co/400x250/...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Tạo Nhiệm Vụ</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitAddTask(e) {
+            e.preventDefault();
+            const title = document.getElementById('t-title').value;
+            const req = document.getElementById('t-req').value;
+            const points = parseInt(document.getElementById('t-points').value);
+            const deadline = document.getElementById('t-deadline').value;
+            const image = document.getElementById('t-img').value;
+
+            dbState.tasks.push({ id: Date.now(), title, req, points, deadline, image });
+            saveState();
+            closeModal();
+            showToast('Đã thêm nhiệm vụ thành công!');
+            renderAll();
+        }
+
+        function deleteTask(id) {
+            if (confirm('Bạn có chắc muốn xóa nhiệm vụ này?')) {
+                dbState.tasks = dbState.tasks.filter(t => t.id !== id);
+                saveState();
+                showToast('Đã xóa nhiệm vụ!');
+                renderAll();
+            }
+        }
+
+        function openEditTaskModal(id) {
+            const task = dbState.tasks.find(t => t.id === id);
+            if (!task) return;
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="edit" class="text-blue-400"></i> Chỉnh Sửa Nhiệm Vụ</h3>
+                <form onsubmit="submitEditTask(event, ${task.id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên nhiệm vụ</label>
+                        <input type="text" id="et-title" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${task.title}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Yêu cầu nhiệm vụ</label>
+                        <textarea id="et-req" required rows="2" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none">${task.req}</textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số điểm thưởng</label>
+                            <input type="number" id="et-points" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${task.points}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Thời gian kết thúc</label>
+                            <input type="date" id="et-deadline" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${task.deadline}">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="et-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${task.image}">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitEditTask(e, id) {
+            e.preventDefault();
+            const task = dbState.tasks.find(t => t.id === id);
+            if (!task) return;
+            task.title = document.getElementById('et-title').value;
+            task.req = document.getElementById('et-req').value;
+            task.points = parseInt(document.getElementById('et-points').value);
+            task.deadline = document.getElementById('et-deadline').value;
+            task.image = document.getElementById('et-img').value;
+
+            saveState();
+            closeModal();
+            showToast('Đã cập nhật nhiệm vụ thành công!');
+            renderAll();
+        }
+
+        function openSubmitTaskModal(taskId) {
+            if (!dbState.currentUser) {
+                showToast('Vui lòng đăng nhập để làm nhiệm vụ!', 'error');
+                openLoginModal();
+                return;
+            }
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="send" class="text-amber-400"></i> Nộp Minh Chứng Nhiệm Vụ</h3>
+                <p class="text-xs text-zinc-400 mb-4">Chỉ chấp nhận link liên kết từ <strong>TIKTOK</strong>, <strong>FACEBOOK</strong> hoặc <strong>YOUTUBE</strong>.</p>
+                <form onsubmit="submitTaskProof(event, ${taskId})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Đường dẫn liên kết (Link Video / Bài viết)</label>
+                        <input type="url" id="task-proof-link" required placeholder="https://tiktok.com/@... hoặc https://facebook.com/..." class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-amber-500 text-black text-xs font-extrabold rounded-xl hover:bg-amber-400">Gửi Báo Cáo</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitTaskProof(e, taskId) {
+            e.preventDefault();
+            const link = document.getElementById('task-proof-link').value.trim();
+            const lower = link.toLowerCase();
+
+            if (!lower.includes('tiktok.com') && !lower.includes('facebook.com') && !lower.includes('fb.watch') && !lower.includes('youtube.com') && !lower.includes('youtu.be')) {
+                showToast('Chỉ cho phép liên kết từ TIKTOK, FACEBOOK hoặc YOUTUBE!', 'error');
+                return;
+            }
+
+            const task = dbState.tasks.find(t => t.id === taskId);
+            
+            // Mark as claimed for this user
+            if (!dbState.userClaimedTasks[dbState.currentUser.username]) {
+                dbState.userClaimedTasks[dbState.currentUser.username] = [];
+            }
+            dbState.userClaimedTasks[dbState.currentUser.username].push(taskId);
+
+            // Send to admin task submissions inbox
+            dbState.taskSubmissions.push({
+                id: Date.now(),
+                taskId,
+                taskTitle: task ? task.title : 'Nhiệm vụ',
+                points: task ? task.points : 0,
+                username: dbState.currentUser.username,
+                link,
+                date: new Date().toLocaleString(),
+                status: 'pending'
+            });
+
+            saveState();
+            closeModal();
+            showToast('Nộp báo cáo nhiệm vụ thành công! Chờ Admin duyệt để nhận điểm.');
+            renderAll();
+        }
+
+
+        // --- 4. ĐỔI QUÀ ---
+        function renderRewardsTab() {
+            const isAdmin = dbState.currentUser && dbState.currentUser.role === 'admin';
+            const user = dbState.currentUser;
+
+            return `
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl">
+                        <div>
+                            <span class="px-3 py-1 bg-emerald-500/10 text-gaming-neon border border-emerald-500/30 text-xs font-black rounded-full uppercase">Cửa hàng đổi quà</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mt-2">KHO QUÀ TẶNG CLAN</h2>
+                            <p class="text-xs sm:text-sm text-zinc-400 mt-1">Dùng điểm thưởng tích lũy từ nhiệm vụ để đổi lấy quà tặng giá trị.</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="px-4 py-2 bg-gaming-dark border border-gaming-border rounded-xl text-xs font-bold text-white">
+                                Điểm hiện có: <span class="text-gaming-neon text-sm ml-1">${user ? user.points : 0} pts</span>
+                            </div>
+                            ${isAdmin ? `
+                                <button onclick="openAddRewardModal()" class="px-4 py-2 bg-gaming-neon text-black font-extrabold text-xs rounded-xl flex items-center gap-1.5 hover:bg-emerald-400 shadow-lg">
+                                    <i data-lucide="plus" class="w-4 h-4"></i> Thêm quà
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Rewards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${dbState.rewards.map(rew => `
+                            <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group">
+                                <div>
+                                    <div class="relative h-48 overflow-hidden bg-gaming-dark">
+                                        <img src="${rew.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <div class="absolute top-3 left-3 px-3 py-1 bg-gaming-neon text-black text-xs font-black rounded-full shadow">
+                                            ${rew.points} điểm
+                                        </div>
+                                        <div class="absolute bottom-3 right-3 px-2.5 py-1 bg-black/70 backdrop-blur-md text-white text-[10px] font-bold rounded-lg">
+                                            Còn lại: ${rew.qty}
+                                        </div>
+                                        ${isAdmin ? `
+                                            <div class="absolute top-3 right-3 flex gap-1.5">
+                                                <button onclick="openEditRewardModal(${rew.id})" class="p-1.5 bg-black/80 hover:bg-blue-600 text-white rounded-lg text-xs" title="Sửa"><i data-lucide="edit" class="w-3.5 h-3.5"></i></button>
+                                                <button onclick="deleteReward(${rew.id})" class="p-1.5 bg-black/80 hover:bg-red-600 text-white rounded-lg text-xs" title="Xóa"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                    <div class="p-5">
+                                        <h3 class="font-bold text-white text-base mb-1">${rew.name}</h3>
+                                        <p class="text-xs text-zinc-400">Phần quà độc quyền chính thức từ Freedom Wings.</p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="redeemReward(${rew.id})" class="w-full py-2.5 bg-gaming-neon hover:bg-emerald-400 text-black text-xs font-extrabold rounded-xl transition-colors shadow-lg">
+                                        Đổi Quà Ngay
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function openAddRewardModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="text-gaming-neon"></i> Thêm Quà Tặng Mới</h3>
+                <form onsubmit="submitAddReward(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên quà tặng</label>
+                        <input type="text" id="rew-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tên phần quà...">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số điểm để đổi</label>
+                            <input type="number" id="rew-points" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="200">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số lượng quà</label>
+                            <input type="number" id="rew-qty" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="10">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="rew-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://placehold.co/400x250/...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Thêm Quà</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitAddReward(e) {
+            e.preventDefault();
+            const name = document.getElementById('rew-name').value;
+            const points = parseInt(document.getElementById('rew-points').value);
+            const qty = parseInt(document.getElementById('rew-qty').value);
+            const image = document.getElementById('rew-img').value;
+
+            dbState.rewards.push({ id: Date.now(), name, points, qty, image });
+            saveState();
+            closeModal();
+            showToast('Đã thêm quà thành công!');
+            renderAll();
+        }
+
+        function deleteReward(id) {
+            if (confirm('Bạn có chắc muốn xóa phần quà này?')) {
+                dbState.rewards = dbState.rewards.filter(r => r.id !== id);
+                saveState();
+                showToast('Đã xóa quà!');
+                renderAll();
+            }
+        }
+
+        function openEditRewardModal(id) {
+            const rew = dbState.rewards.find(r => r.id === id);
+            if (!rew) return;
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="edit" class="text-blue-400"></i> Chỉnh Sửa Quà Tặng</h3>
+                <form onsubmit="submitEditReward(event, ${rew.id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên quà tặng</label>
+                        <input type="text" id="erew-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${rew.name}">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số điểm để đổi</label>
+                            <input type="number" id="erew-points" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${rew.points}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Số lượng quà</label>
+                            <input type="number" id="erew-qty" required min="1" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${rew.qty}">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="erew-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${rew.image}">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitEditReward(e, id) {
+            e.preventDefault();
+            const rew = dbState.rewards.find(r => r.id === id);
+            if (!rew) return;
+            rew.name = document.getElementById('erew-name').value;
+            rew.points = parseInt(document.getElementById('erew-points').value);
+            rew.qty = parseInt(document.getElementById('erew-qty').value);
+            rew.image = document.getElementById('erew-img').value;
+
+            saveState();
+            closeModal();
+            showToast('Đã cập nhật phần quà!');
+            renderAll();
+        }
+
+        function redeemReward(id) {
+            if (!dbState.currentUser) {
+                showToast('Vui lòng đăng nhập để đổi quà!', 'error');
+                openLoginModal();
+                return;
+            }
+
+            const rew = dbState.rewards.find(r => r.id === id);
+            if (!rew) return;
+
+            if (rew.qty <= 0) {
+                showToast('KHÔNG ĐỦ SỐ LƯỢNG / HẾT LƯỢT ĐỔI QUÀ!', 'error');
+                return;
+            }
+
+            if (dbState.currentUser.points < rew.points) {
+                showToast('KHÔNG ĐỦ ĐIỂM ĐỂ ĐỔI QUÀ NÀY!', 'error');
+                return;
+            }
+
+            // Deduct points
+            dbState.currentUser.points -= rew.points;
+            rew.qty -= 1;
+
+            // Sync user in users list
+            const userIdx = dbState.users.findIndex(u => u.username === dbState.currentUser.username);
+            if (userIdx !== -1) {
+                dbState.users[userIdx].points = dbState.currentUser.points;
+            }
+
+            // Send notification to member mailbox & admin mailbox
+            const mailMsg = {
+                id: Date.now(),
+                recipient: dbState.currentUser.username,
+                title: `Đổi quà thành công: ${rew.name}`,
+                content: `Bạn đã đổi thành công phần quà "${rew.name}" với giá ${rew.points} điểm. BQT sẽ liên hệ trao thưởng sớm nhất!`,
+                date: new Date().toLocaleString(),
+                sender: 'Hệ thống Quà Tặng'
+            };
+            dbState.mailboxes.push(mailMsg);
+
+            // Also admin notification
+            dbState.mailboxes.push({
+                id: Date.now() + 1,
+                recipient: 'freedomwings2025',
+                title: `Thành viên ${dbState.currentUser.username} vừa đổi quà`,
+                content: `Thành viên ${dbState.currentUser.name} (${dbState.currentUser.username}) đã đổi phần quà "${rew.name}" (${rew.points} điểm).`,
+                date: new Date().toLocaleString(),
+                sender: 'Hệ thống'
+            });
+
+            saveState();
+            showToast(`Đổi quà thành công! Đã trừ ${rew.points} điểm.`);
+            renderAll();
+        }
+
+
+        // --- 5. DỊCH VỤ ---
+        function renderServicesTab() {
+            const isAdmin = dbState.currentUser && dbState.currentUser.role === 'admin';
+
+            return `
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl">
+                        <div>
+                            <span class="px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/30 text-xs font-black rounded-full uppercase">Dịch vụ Pro Player</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mt-2">THUÊ DỊCH VỤ CLAN</h2>
+                            <p class="text-xs sm:text-sm text-zinc-400 mt-1">Cày rank, train kỹ năng, hoàn thành sự kiện bởi các game thủ chuyên nghiệp.</p>
+                        </div>
+                        <div class="flex items-center gap-3 w-full md:w-auto">
+                            <div class="relative flex-grow md:w-64">
+                                <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-zinc-400"></i>
+                                <input type="text" id="service-search" oninput="filterServices()" placeholder="Tìm dịch vụ..." class="w-full bg-gaming-dark border border-gaming-border rounded-xl pl-9 pr-4 py-2 text-sm text-white focus:border-gaming-neon outline-none">
+                            </div>
+                            ${isAdmin ? `
+                                <button onclick="openAddServiceModal()" class="px-4 py-2 bg-gaming-neon text-black font-extrabold text-xs rounded-xl flex items-center gap-1.5 hover:bg-emerald-400 shadow-lg flex-shrink-0">
+                                    <i data-lucide="plus" class="w-4 h-4"></i> Thêm dịch vụ
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Services Grid -->
+                    <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${dbState.services.map(srv => `
+                            <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between group">
+                                <div>
+                                    <div class="relative h-48 overflow-hidden bg-gaming-dark">
+                                        <img src="${srv.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                        <div class="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white text-xs font-black rounded-full shadow">
+                                            ${srv.price}
+                                        </div>
+                                        ${isAdmin ? `
+                                            <div class="absolute top-3 right-3 flex gap-1.5">
+                                                <button onclick="openEditServiceModal(${srv.id})" class="p-1.5 bg-black/80 hover:bg-blue-600 text-white rounded-lg text-xs" title="Sửa"><i data-lucide="edit" class="w-3.5 h-3.5"></i></button>
+                                                <button onclick="deleteService(${srv.id})" class="p-1.5 bg-black/80 hover:bg-red-600 text-white rounded-lg text-xs" title="Xóa"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                    <div class="p-5 space-y-2">
+                                        <h3 class="font-bold text-white text-base">${srv.name}</h3>
+                                        <p class="text-xs text-zinc-300 leading-relaxed">${srv.desc}</p>
+                                    </div>
+                                </div>
+                                <div class="p-5 pt-0">
+                                    <button onclick="openBookServiceModal('${srv.name}')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold rounded-xl transition-colors shadow-lg">
+                                        Thuê Dịch Vụ Này
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterServices() {
+            const keyword = document.getElementById('service-search').value.toLowerCase();
+            const grid = document.getElementById('services-grid');
+            const cards = grid.children;
+            
+            dbState.services.forEach((srv, idx) => {
+                const match = srv.name.toLowerCase().includes(keyword) || srv.desc.toLowerCase().includes(keyword);
+                if (cards[idx]) {
+                    cards[idx].style.display = match ? 'flex' : 'none';
+                }
+            });
+        }
+
+        function openAddServiceModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="plus-circle" class="text-gaming-neon"></i> Thêm Dịch Vụ Mới</h3>
+                <form onsubmit="submitAddService(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên dịch vụ</label>
+                        <input type="text" id="srv-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tên dịch vụ...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Giá dịch vụ</label>
+                        <input type="text" id="srv-price" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="150.000đ">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Mô tả dịch vụ</label>
+                        <textarea id="srv-desc" required rows="2" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Mô tả chi tiết..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="srv-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://placehold.co/400x250/...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl hover:bg-emerald-400">Thêm Dịch Vụ</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitAddService(e) {
+            e.preventDefault();
+            const name = document.getElementById('srv-name').value;
+            const price = document.getElementById('srv-price').value;
+            const desc = document.getElementById('srv-desc').value;
+            const image = document.getElementById('srv-img').value;
+
+            dbState.services.push({ id: Date.now(), name, price, desc, image });
+            saveState();
+            closeModal();
+            showToast('Đã thêm dịch vụ thành công!');
+            renderAll();
+        }
+
+        function deleteService(id) {
+            if (confirm('Bạn có chắc muốn xóa dịch vụ này?')) {
+                dbState.services = dbState.services.filter(s => s.id !== id);
+                saveState();
+                showToast('Đã xóa dịch vụ!');
+                renderAll();
+            }
+        }
+
+        function openEditServiceModal(id) {
+            const srv = dbState.services.find(s => s.id === id);
+            if (!srv) return;
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="edit" class="text-blue-400"></i> Chỉnh Sửa Dịch Vụ</h3>
+                <form onsubmit="submitEditService(event, ${srv.id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên dịch vụ</label>
+                        <input type="text" id="esrv-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${srv.name}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Giá dịch vụ</label>
+                        <input type="text" id="esrv-price" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${srv.price}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Mô tả dịch vụ</label>
+                        <textarea id="esrv-desc" required rows="2" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none">${srv.desc}</textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Link Ảnh Minh Họa</label>
+                        <input type="text" id="esrv-img" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${srv.image}">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitEditService(e, id) {
+            e.preventDefault();
+            const srv = dbState.services.find(s => s.id === id);
+            if (!srv) return;
+            srv.name = document.getElementById('esrv-name').value;
+            srv.price = document.getElementById('esrv-price').value;
+            srv.desc = document.getElementById('esrv-desc').value;
+            srv.image = document.getElementById('esrv-img').value;
+
+            saveState();
+            closeModal();
+            showToast('Đã cập nhật dịch vụ!');
+            renderAll();
+        }
+
+        function openBookServiceModal(serviceName) {
+            if (!dbState.currentUser) {
+                showToast('Vui lòng đăng nhập trước khi thuê dịch vụ!', 'error');
+                openLoginModal();
+                return;
+            }
+            const user = dbState.currentUser;
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="briefcase" class="text-blue-400"></i> Đặt Thuê Dịch Vụ</h3>
+                <p class="text-xs text-gaming-neon mb-4">Dịch vụ: <strong>${serviceName}</strong></p>
+                <form onsubmit="submitBookService(event, '${serviceName}')" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Họ & Tên</label>
+                        <input type="text" id="book-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${user.name || ''}">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">UID Game</label>
+                        <input type="text" id="book-uid" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${user.uid || ''}" placeholder="UID Game của bạn">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">SĐT</label>
+                            <input type="tel" id="book-phone" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="0912345678">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Gmail</label>
+                            <input type="email" id="book-email" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" value="${user.email || ''}">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Ghi chú (nếu có)</label>
+                        <textarea id="book-note" rows="2" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Yêu cầu cụ thể..."></textarea>
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Xác Nhận Đặt Đơn</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitBookService(e, serviceName) {
+            e.preventDefault();
+            const fullName = document.getElementById('book-name').value;
+            const uidGame = document.getElementById('book-uid').value;
+            const phone = document.getElementById('book-phone').value;
+            const email = document.getElementById('book-email').value;
+            const note = document.getElementById('book-note').value;
+
+            const order = {
+                id: Date.now(),
+                serviceName,
+                username: dbState.currentUser.username,
+                fullName,
+                uidGame,
+                phone,
+                email,
+                note,
+                date: new Date().toLocaleString(),
+                status: 'pending'
+            };
+
+            dbState.serviceOrders.push(order);
+            saveState();
+            closeModal();
+            showToast('Đặt dịch vụ thành công! Đơn hàng đã gửi về Admin.');
+        }
+
+
+        // --- 6. HỒ SƠ ---
+        function renderProfileTab() {
+            if (!dbState.currentUser) {
+                return `
+                    <div class="text-center py-20 space-y-4">
+                        <div class="w-16 h-16 bg-gaming-border rounded-full flex items-center justify-center mx-auto text-gaming-neon">
+                            <i data-lucide="user-x" class="w-8 h-8"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-white">Bạn chưa đăng nhập</h2>
+                        <p class="text-sm text-zinc-400">Vui lòng đăng nhập để xem và chỉnh sửa hồ sơ cá nhân.</p>
+                        <button onclick="openLoginModal()" class="px-6 py-2.5 bg-gaming-neon text-black font-bold rounded-xl">Đăng nhập ngay</button>
+                    </div>
+                `;
+            }
+
+            const u = dbState.currentUser;
+
+            return `
+                <div class="max-w-3xl mx-auto space-y-8">
+                    <div class="bg-gaming-card border border-gaming-border rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        
+                        <div class="flex flex-col sm:flex-row items-center gap-6 pb-8 border-b border-gaming-border">
+                            <div class="relative group">
+                                <img src="${u.avatar || 'https://placehold.co/150'}" class="w-28 h-28 rounded-2xl object-cover border-2 border-gaming-neon shadow-xl">
+                                <button onclick="editAvatar()" class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex flex-col items-center justify-center text-white text-xs font-bold gap-1">
+                                    <i data-lucide="camera" class="w-5 h-5 text-gaming-neon"></i> Đổi ảnh
+                                </button>
+                            </div>
+                            <div class="text-center sm:text-left space-y-2">
+                                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                                    <h2 class="text-2xl font-black text-white">${u.name || u.username}</h2>
+                                    <span class="px-3 py-0.5 bg-emerald-500/20 text-gaming-neon text-xs rounded-full font-extrabold">${u.role}</span>
+                                </div>
+                                <p class="text-xs text-zinc-400">Tên đăng nhập: <strong class="text-white">${u.username}</strong></p>
+                                <div class="flex items-center justify-center sm:justify-start gap-4 text-xs font-semibold pt-1">
+                                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-lg">Điểm nhiệm vụ: ${u.points || 0} pts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit Profile Form -->
+                        <form onsubmit="updateProfile(event)" class="space-y-6 pt-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-400 mb-1.5">Tên hồ sơ</label>
+                                    <input type="text" id="prof-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" value="${u.name || ''}">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-400 mb-1.5">UID Game</label>
+                                    <input type="text" id="prof-uid" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" value="${u.uid || ''}" placeholder="FW • ...">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-400 mb-1.5">Gmail (Khóa - Admin sửa)</label>
+                                    <input type="email" disabled class="w-full bg-gaming-dark/50 border border-gaming-border/50 rounded-xl px-4 py-3 text-zinc-500 text-sm cursor-not-allowed" value="${u.email || ''}">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-zinc-400 mb-1.5">Vai trò (Khóa - Admin sửa)</label>
+                                    <input type="text" disabled class="w-full bg-gaming-dark/50 border border-gaming-border/50 rounded-xl px-4 py-3 text-zinc-500 text-sm cursor-not-allowed" value="${u.role}">
+                                </div>
+                            </div>
+
+                            <!-- Bank details -->
+                            <div class="border-t border-gaming-border pt-6 space-y-4">
+                                <h3 class="font-bold text-white text-sm flex items-center gap-2"><i data-lucide="credit-card" class="text-gaming-neon"></i> Tài Khoản Ngân Hàng (Nhận thưởng)</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-xs font-bold text-zinc-400 mb-1.5">Tên Ngân Hàng</label>
+                                        <input type="text" id="prof-bank-name" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" value="${u.bankName || ''}" placeholder="VD: Techcombank, MB, VCBank">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-zinc-400 mb-1.5">Số Tài Khoản</label>
+                                        <input type="text" id="prof-bank-acc" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" value="${u.bankAccount || ''}" placeholder="Số tài khoản...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end pt-4">
+                                <button type="submit" class="px-6 py-3 bg-gaming-neon hover:bg-emerald-400 text-black font-extrabold text-sm rounded-xl shadow-lg transition-colors">
+                                    Lưu Thay Đổi Hồ Sơ
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        function editAvatar() {
+            const url = prompt('Nhập URL ảnh đại diện mới:', dbState.currentUser.avatar || '');
+            if (url) {
+                dbState.currentUser.avatar = url;
+                // update in users list
+                const idx = dbState.users.findIndex(u => u.username === dbState.currentUser.username);
+                if (idx !== -1) dbState.users[idx].avatar = url;
+                saveState();
+                showToast('Đã đổi ảnh đại diện thành công!');
+                renderAll();
+            }
+        }
+
+        function updateProfile(e) {
+            e.preventDefault();
+            const name = document.getElementById('prof-name').value;
+            const uid = document.getElementById('prof-uid').value;
+            const bankName = document.getElementById('prof-bank-name').value;
+            const bankAccount = document.getElementById('prof-bank-acc').value;
+
+            dbState.currentUser.name = name;
+            dbState.currentUser.uid = uid;
+            dbState.currentUser.bankName = bankName;
+            dbState.currentUser.bankAccount = bankAccount;
+
+            const idx = dbState.users.findIndex(u => u.username === dbState.currentUser.username);
+            if (idx !== -1) {
+                dbState.users[idx] = { ...dbState.currentUser };
+            }
+
+            saveState();
+            showToast('Cập nhật hồ sơ thành công!');
+            renderAll();
+        }
+
+
+        // --- 7. HÒM THƯ ---
+        function renderMailboxTab() {
+            if (!dbState.currentUser) {
+                return `
+                    <div class="text-center py-20 space-y-4">
+                        <div class="w-16 h-16 bg-gaming-border rounded-full flex items-center justify-center mx-auto text-gaming-neon">
+                            <i data-lucide="mail" class="w-8 h-8"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-white">Bạn chưa đăng nhập</h2>
+                        <p class="text-sm text-zinc-400">Vui lòng đăng nhập để xem hòm thư cá nhân.</p>
+                        <button onclick="openLoginModal()" class="px-6 py-2.5 bg-gaming-neon text-black font-bold rounded-xl">Đăng nhập ngay</button>
+                    </div>
+                `;
+            }
+
+            const username = dbState.currentUser.username;
+            // Filter mail for current user or 'all'
+            const myMails = dbState.mailboxes.filter(m => m.recipient === username || m.recipient === 'all');
+
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl flex justify-between items-center">
+                        <div>
+                            <span class="px-3 py-1 bg-emerald-500/10 text-gaming-neon border border-emerald-500/30 text-xs font-black rounded-full uppercase">Hộp thư đến</span>
+                            <h2 class="text-2xl font-black text-white mt-2">HÒM THƯ CÁ NHÂN</h2>
+                            <p class="text-xs text-zinc-400">Tất cả thư và thông báo sẽ tự động xóa sau 14 ngày.</p>
+                        </div>
+                        <div class="px-4 py-2 bg-gaming-dark border border-gaming-border rounded-xl text-xs font-bold text-zinc-300">
+                            Tổng thư: <span class="text-gaming-neon">${myMails.length}</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        ${myMails.length === 0 ? `
+                            <div class="text-center py-16 bg-gaming-card border border-gaming-border rounded-2xl text-zinc-500">
+                                <i data-lucide="mail-open" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
+                                <p>Hòm thư của bạn hiện đang trống.</p>
+                            </div>
+                        ` : myMails.map(mail => `
+                            <div class="bg-gaming-card border border-gaming-border rounded-2xl p-5 hover:border-gaming-neon/50 transition-colors flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2 text-xs text-zinc-400">
+                                        <i data-lucide="send" class="w-3.5 h-3.5 text-gaming-neon"></i>
+                                        <span>Từ: <strong class="text-white">${mail.sender || 'BQT Clan'}</strong></span>
+                                        <span>•</span>
+                                        <span>${mail.date}</span>
+                                    </div>
+                                    <h3 class="font-bold text-white text-base">${mail.title}</h3>
+                                    <p class="text-xs text-zinc-300 line-clamp-1">${mail.content}</p>
+                                </div>
+                                <button onclick="openMailDetail(${mail.id})" class="px-4 py-2 bg-gaming-border hover:bg-gaming-neon hover:text-black text-white text-xs font-bold rounded-xl transition-colors flex-shrink-0">
+                                    Xem Chi Tiết
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function openMailDetail(mailId) {
+            const mail = dbState.mailboxes.find(m => m.id === mailId);
+            if (!mail) return;
+            openModal(`
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start pb-3 border-b border-gaming-border">
+                        <div>
+                            <span class="text-xs text-gaming-neon font-bold">${mail.date}</span>
+                            <h3 class="text-lg font-black text-white mt-1">${mail.title}</h3>
+                            <p class="text-xs text-zinc-400 mt-0.5">Người gửi: ${mail.sender || 'BQT Clan'}</p>
+                        </div>
+                        <button onclick="closeModal()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                    </div>
+                    <div class="py-2 text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">
+                        ${mail.content}
+                    </div>
+                    <div class="flex justify-end pt-4 border-t border-gaming-border">
+                        <button onclick="closeModal()" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl">Đóng</button>
+                    </div>
+                </div>
+            `);
+        }
+
+
+        // --- 8. QUẢN LÝ (ADMIN MANAGEMENT DASHBOARD) ---
+        function renderAdminTab() {
+            return `
+                <div class="space-y-8">
+                    <div class="bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <span class="px-3 py-1 bg-red-500/10 text-red-400 border border-red-500/30 text-xs font-black rounded-full uppercase">Khu vực kiểm soát tối cao</span>
+                            <h2 class="text-2xl font-black text-white mt-2">BẢNG ĐIỀU KHIỂN ADMIN</h2>
+                            <p class="text-xs text-zinc-400">Quản lý thành viên, duyệt đơn clan, báo cáo nhiệm vụ, đơn dịch vụ và gửi thư riêng.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="switchAdminSubtab('members')" id="adm-btn-members" class="px-4 py-2 rounded-xl text-xs font-bold bg-gaming-neon text-black">Thành viên</button>
+                            <button onclick="switchAdminSubtab('apps')" id="adm-btn-apps" class="px-4 py-2 rounded-xl text-xs font-bold bg-gaming-border text-white">Đơn Clan</button>
+                            <button onclick="switchAdminSubtab('tasks')" id="adm-btn-tasks" class="px-4 py-2 rounded-xl text-xs font-bold bg-gaming-border text-white">Báo cáo Task</button>
+                            <button onclick="switchAdminSubtab('services')" id="adm-btn-services" class="px-4 py-2 rounded-xl text-xs font-bold bg-gaming-border text-white">Đơn Dịch Vụ</button>
+                            <button onclick="switchAdminSubtab('message')" id="adm-btn-message" class="px-4 py-2 rounded-xl text-xs font-bold bg-gaming-border text-white">Gửi Thư</button>
+                        </div>
+                    </div>
+
+                    <div id="admin-subtab-container">
+                        <!-- Default rendered subtab -->
+                        ${renderAdminMembersSubtab()}
+                    </div>
+                </div>
+            `;
+        }
+
+        let adminSubtab = 'members';
+
+        function switchAdminSubtab(sub) {
+            adminSubtab = sub;
+            ['members', 'apps', 'tasks', 'services', 'message'].forEach(s => {
+                const btn = document.getElementById(`adm-btn-${s}`);
+                if (btn) {
+                    if (s === sub) {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-gaming-neon text-black';
+                    } else {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-gaming-border text-white';
+                    }
+                }
+            });
+
+            const container = document.getElementById('admin-subtab-container');
+            if (sub === 'members') container.innerHTML = renderAdminMembersSubtab();
+            else if (sub === 'apps') container.innerHTML = renderAdminAppsSubtab();
+            else if (sub === 'tasks') container.innerHTML = renderAdminTasksSubtab();
+            else if (sub === 'services') container.innerHTML = renderAdminServicesSubtab();
+            else if (sub === 'message') container.innerHTML = renderAdminMessageSubtab();
+            lucide.createIcons();
+        }
+
+        // Subtab 1: Member Management
+        function renderAdminMembersSubtab() {
+            return `
+                <div class="space-y-6">
+                    <div class="flex gap-4 items-center">
+                        <div class="relative flex-grow">
+                            <i data-lucide="search" class="absolute left-3 top-3.5 w-4 h-4 text-zinc-400"></i>
+                            <input type="text" id="adm-mem-search" oninput="filterAdminMembers()" placeholder="Tìm tên thành viên..." class="w-full bg-gaming-card border border-gaming-border rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:border-gaming-neon outline-none">
+                        </div>
+                    </div>
+
+                    <div class="bg-gaming-card border border-gaming-border rounded-2xl overflow-hidden shadow-xl">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead>
+                                    <tr class="border-b border-gaming-border text-zinc-400 text-xs bg-gaming-dark">
+                                        <th class="p-4">Thành viên</th>
+                                        <th class="p-4">UID Game</th>
+                                        <th class="p-4">Gmail</th>
+                                        <th class="p-4">Ngân hàng</th>
+                                        <th class="p-4">Điểm</th>
+                                        <th class="p-4">Role</th>
+                                        <th class="p-4 text-right">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adm-member-tbody" class="divide-y divide-gaming-border">
+                                    ${dbState.users.map(u => `
+                                        <tr class="hover:bg-gaming-dark/50 transition-colors">
+                                            <td class="p-4 flex items-center gap-3">
+                                                <img src="${u.avatar || 'https://placehold.co/100'}" class="w-9 h-9 rounded-lg object-cover">
+                                                <div>
+                                                    <p class="font-bold text-white">${u.name || u.username}</p>
+                                                    <p class="text-xs text-zinc-500">@${u.username}</p>
+                                                </div>
+                                            </td>
+                                            <td class="p-4 text-zinc-300 font-mono text-xs">${u.uid || 'Chưa cập nhật'}</td>
+                                            <td class="p-4 text-zinc-300 text-xs">${u.email}</td>
+                                            <td class="p-4 text-xs text-zinc-300">
+                                                ${u.bankName ? `${u.bankName} - ${u.bankAccount}` : '<span class="text-zinc-600">Chưa có</span>'}
+                                            </td>
+                                            <td class="p-4 text-gaming-neon font-extrabold">${u.points || 0}</td>
+                                            <td class="p-4">
+                                                <select onchange="adminChangeRole('${u.username}', this.value)" class="bg-gaming-dark border border-gaming-border text-xs rounded-lg px-2 py-1 text-white outline-none">
+                                                    <option value="THÀNH VIÊN" ${u.role === 'THÀNH VIÊN' ? 'selected' : ''}>THÀNH VIÊN</option>
+                                                    <option value="TUYỂN THỦ" ${u.role === 'TUYỂN THỦ' ? 'selected' : ''}>TUYỂN THỦ</option>
+                                                    <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>admin</option>
+                                                </select>
+                                            </td>
+                                            <td class="p-4 text-right space-x-2">
+                                                <button onclick="adminKickUser('${u.username}')" class="px-2.5 py-1 bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white rounded-lg text-xs font-bold transition-colors">Kick / Xóa</button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterAdminMembers() {
+            const keyword = document.getElementById('adm-mem-search').value.toLowerCase();
+            const rows = document.getElementById('adm-member-tbody').children;
+            dbState.users.forEach((u, idx) => {
+                const match = u.username.toLowerCase().includes(keyword) || (u.name && u.name.toLowerCase().includes(keyword));
+                if (rows[idx]) rows[idx].style.display = match ? '' : 'none';
+            });
+        }
+
+        function adminChangeRole(username, newRole) {
+            const u = dbState.users.find(user => user.username === username);
+            if (u) {
+                u.role = newRole;
+                saveState();
+                showToast(`Đã đổi role của ${username} thành ${newRole}`);
+                renderAll();
+            }
+        }
+
+        function adminKickUser(username) {
+            if (username === ADMIN_USER.username) {
+                showToast('Không thể kick tài khoản Admin gốc!', 'error');
+                return;
+            }
+            if (confirm(`Bạn có chắc chắn muốn xóa / kick thành viên ${username}?`)) {
+                dbState.users = dbState.users.filter(u => u.username !== username);
+                saveState();
+                showToast('Đã xóa thành viên khỏi clan.');
+                renderAll();
+            }
+        }
+
+        // Subtab 2: Clan Registrations Inbox
+        function renderAdminAppsSubtab() {
+            return `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-white text-base">Danh Sách Đơn Đăng Ký Clan & Tuyển Thủ</h3>
+                    ${dbState.applications.length === 0 ? `
+                        <div class="text-center py-12 bg-gaming-card border border-gaming-border rounded-2xl text-zinc-500">
+                            Không có đơn đăng ký nào đang chờ duyệt.
+                        </div>
+                    ` : dbState.applications.map(app => `
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-0.5 bg-emerald-500/20 text-gaming-neon text-xs font-bold rounded-full">${app.type}</span>
+                                    <span class="text-xs text-zinc-400">${app.date}</span>
+                                </div>
+                                <h4 class="font-bold text-white text-base">${app.fullName} (@${app.username})</h4>
+                                <p class="text-xs text-zinc-300">UID Game: <strong class="text-gaming-neon">${app.uidGame}</strong> | Gmail: ${app.email}</p>
+                                ${app.phone ? `<p class="text-xs text-zinc-300">SĐT: ${app.phone} | Thiết bị: ${app.devices} | Chế độ: ${app.modes}</p>` : ''}
+                                <p class="text-xs text-blue-400 underline cursor-pointer" onclick="window.open('${app.ingameImg}', '_blank')">Xem ảnh ingame xác nhận ↗</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="approveApp(${app.id})" class="px-4 py-2 bg-gaming-neon text-black font-extrabold text-xs rounded-xl hover:bg-emerald-400 shadow">Đồng ý</button>
+                                <button onclick="rejectApp(${app.id})" class="px-4 py-2 bg-red-600 text-white font-extrabold text-xs rounded-xl hover:bg-red-500 shadow">Từ chối</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function approveApp(id) {
+            const app = dbState.applications.find(a => a.id === id);
+            if (!app) return;
+
+            // Send notification to member mailbox
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient: app.username,
+                title: `Đơn ${app.type} đã ĐƯỢC CHẤP NHẬN!`,
+                content: `Chúc mừng bạn! Đơn đăng ký "${app.type}" của bạn đã được Quản trị viên phê duyệt. Chào mừng bạn gia nhập Freedom Wings.`,
+                date: new Date().toLocaleString(),
+                sender: 'BQT Clan'
+            });
+
+            // Remove application
+            dbState.applications = dbState.applications.filter(a => a.id !== id);
+            saveState();
+            showToast('Đã chấp nhận đơn và gửi thư thông báo!');
+            renderAll();
+        }
+
+        function rejectApp(id) {
+            const app = dbState.applications.find(a => a.id === id);
+            if (!app) return;
+
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient: app.username,
+                title: `Đơn ${app.type} bị TỪ CHỐI`,
+                content: `Rất tiếc, đơn đăng ký "${app.type}" của bạn chưa đạt yêu cầu hoặc chưa đổi đúng tên FW • name. Vui lòng kiểm tra lại.`,
+                date: new Date().toLocaleString(),
+                sender: 'BQT Clan'
+            });
+
+            dbState.applications = dbState.applications.filter(a => a.id !== id);
+            saveState();
+            showToast('Đã từ chối đơn.');
+            renderAll();
+        }
+
+        // Subtab 3: Task Reports Inbox
+        function renderAdminTasksSubtab() {
+            return `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-white text-base">Báo Cáo Nhiệm Vụ Thành Viên Gửi</h3>
+                    ${dbState.taskSubmissions.length === 0 ? `
+                        <div class="text-center py-12 bg-gaming-card border border-gaming-border rounded-2xl text-zinc-500">
+                            Không có báo cáo nhiệm vụ nào đang chờ duyệt.
+                        </div>
+                    ` : dbState.taskSubmissions.map(sub => `
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2.5 py-0.5 bg-amber-500/20 text-amber-400 text-xs font-bold rounded-full">+${sub.points} pts</span>
+                                    <span class="text-xs text-zinc-400">${sub.date}</span>
+                                </div>
+                                <h4 class="font-bold text-white text-base">${sub.taskTitle}</h4>
+                                <p class="text-xs text-zinc-300">Thành viên: <strong class="text-gaming-neon">@${sub.username}</strong></p>
+                                <a href="${sub.link}" target="_blank" class="text-xs text-blue-400 underline block truncate max-w-md">Link minh chứng: ${sub.link} ↗</a>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="approveTaskSub(${sub.id})" class="px-4 py-2 bg-gaming-neon text-black font-extrabold text-xs rounded-xl hover:bg-emerald-400 shadow">Chấp nhận (+Điểm)</button>
+                                <button onclick="rejectTaskSub(${sub.id})" class="px-4 py-2 bg-red-600 text-white font-extrabold text-xs rounded-xl hover:bg-red-500 shadow">Từ chối</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function approveTaskSub(id) {
+            const sub = dbState.taskSubmissions.find(s => s.id === id);
+            if (!sub) return;
+
+            // Add points to user
+            const user = dbState.users.find(u => u.username === sub.username);
+            if (user) {
+                user.points = (user.points || 0) + sub.points;
+            }
+
+            // Send notification to member
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient: sub.username,
+                title: `Báo cáo nhiệm vụ "${sub.taskTitle}" ĐÃ ĐƯỢC CHẤP NHẬN!`,
+                content: `Tuyệt vời! Báo cáo nhiệm vụ của bạn đã được duyệt. Bạn nhận được +${sub.points} điểm thưởng vào tài khoản.`,
+                date: new Date().toLocaleString(),
+                sender: 'BQT Task'
+            });
+
+            dbState.taskSubmissions = dbState.taskSubmissions.filter(s => s.id !== id);
+            saveState();
+            showToast('Đã chấp nhận báo cáo và cộng điểm cho thành viên!');
+            renderAll();
+        }
+
+        function rejectTaskSub(id) {
+            const sub = dbState.taskSubmissions.find(s => s.id === id);
+            if (!sub) return;
+
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient: sub.username,
+                title: `Báo cáo nhiệm vụ "${sub.taskTitle}" bị từ chối`,
+                content: `Rất tiếc, link minh chứng của bạn không hợp lệ hoặc chưa làm đúng yêu cầu nhiệm vụ.`,
+                date: new Date().toLocaleString(),
+                sender: 'BQT Task'
+            });
+
+            dbState.taskSubmissions = dbState.taskSubmissions.filter(s => s.id !== id);
+            saveState();
+            showToast('Đã từ chối báo cáo.');
+            renderAll();
+        }
+
+        // Subtab 4: Service Orders Inbox
+        function renderAdminServicesSubtab() {
+            return `
+                <div class="space-y-4">
+                    <h3 class="font-bold text-white text-base">Đơn Đặt Dịch Vụ Của Thành Viên</h3>
+                    ${dbState.serviceOrders.length === 0 ? `
+                        <div class="text-center py-12 bg-gaming-card border border-gaming-border rounded-2xl text-zinc-500">
+                            Không có đơn đặt dịch vụ nào.
+                        </div>
+                    ` : dbState.serviceOrders.map(ord => `
+                        <div class="bg-gaming-card border border-gaming-border rounded-2xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="space-y-1">
+                                <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-full">${ord.serviceName}</span>
+                                <h4 class="font-bold text-white text-base mt-1">${ord.fullName} (@${ord.username})</h4>
+                                <p class="text-xs text-zinc-300">UID: <strong class="text-gaming-neon">${ord.uidGame}</strong> | SĐT: ${ord.phone} | Gmail: ${ord.email}</p>
+                                ${ord.note ? `<p class="text-xs text-zinc-400">Ghi chú: ${ord.note}</p>` : ''}
+                                <p class="text-xs text-zinc-500">${ord.date}</p>
+                            </div>
+                            <button onclick="openConfirmServiceOrderModal(${ord.id})" class="px-4 py-2 bg-blue-600 text-white font-extrabold text-xs rounded-xl hover:bg-blue-500 shadow">
+                                Gửi Thư Xác Nhận & Staff
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function openConfirmServiceOrderModal(orderId) {
+            const ord = dbState.serviceOrders.find(o => o.id === orderId);
+            if (!ord) return;
+
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="send" class="text-blue-400"></i> Gửi Thư Xác Nhận Dịch Vụ</h3>
+                <form onsubmit="submitConfirmServiceOrder(event, ${ord.id})" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Họ & Tên (Người làm dịch vụ / Staff)</label>
+                        <input type="text" id="staff-name" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tên Pro Player...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">UID người làm dịch vụ</label>
+                        <input type="text" id="staff-uid" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="UID Pro Player...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">SĐT người làm dịch vụ</label>
+                        <input type="tel" id="staff-phone" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="SĐT liên hệ...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Nền tảng mạng xã hội / Link liên kết</label>
+                        <input type="text" id="staff-link" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="https://facebook.com/...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl hover:bg-zinc-700">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-500">Gửi Thư Cho Khách</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitConfirmServiceOrder(e, orderId) {
+            e.preventDefault();
+            const ord = dbState.serviceOrders.find(o => o.id === orderId);
+            if (!ord) return;
+
+            const staffName = document.getElementById('staff-name').value;
+            const staffUid = document.getElementById('staff-uid').value;
+            const staffPhone = document.getElementById('staff-phone').value;
+            const staffLink = document.getElementById('staff-link').value;
+
+            // Send confirmation mail to customer mailbox
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient: ord.username,
+                title: `Xác nhận đơn dịch vụ: ${ord.serviceName}`,
+                content: `Đơn đặt dịch vụ "${ord.serviceName}" của bạn đã được tiếp nhận và phân công Pro Player hỗ trợ:\n\n• Họ & tên nhân sự: ${staffName}\n• UID nhân sự: ${staffUid}\n• SĐT nhân sự: ${staffPhone}\n• Link mạng xã hội liên hệ: ${staffLink}`,
+                date: new Date().toLocaleString(),
+                sender: 'BQT Dịch Vụ'
+            });
+
+            dbState.serviceOrders = dbState.serviceOrders.filter(o => o.id !== orderId);
+            saveState();
+            closeModal();
+            showToast('Đã gửi thư xác nhận dịch vụ tới khách hàng thành công!');
+            renderAll();
+        }
+
+        // Subtab 5: Direct Messaging Tool
+        function renderAdminMessageSubtab() {
+            return `
+                <div class="bg-gaming-card border border-gaming-border p-6 rounded-2xl shadow-xl max-w-2xl mx-auto space-y-4">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i data-lucide="send" class="text-gaming-neon"></i> Gửi Thư Trực Tiếp Đến Thành Viên</h3>
+                    <form onsubmit="adminSendDirectMail(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Tên tài khoản người nhận (Username)</label>
+                            <input type="text" id="dm-recipient" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="VD: membertest (hoặc 'all' cho tất cả)">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Tiêu đề thư</label>
+                            <input type="text" id="dm-title" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Tiêu đề thư...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-zinc-400 mb-1">Nội dung thư</label>
+                            <textarea id="dm-content" required rows="4" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nội dung chi tiết..."></textarea>
+                        </div>
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="px-6 py-3 bg-gaming-neon hover:bg-emerald-400 text-black font-extrabold text-xs rounded-xl shadow-lg transition-colors">
+                                Gửi Thư Ngay
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+        }
+
+        function adminSendDirectMail(e) {
+            e.preventDefault();
+            const recipient = document.getElementById('dm-recipient').value.trim();
+            const title = document.getElementById('dm-title').value.trim();
+            const content = document.getElementById('dm-content').value.trim();
+
+            dbState.mailboxes.push({
+                id: Date.now(),
+                recipient,
+                title,
+                content,
+                date: new Date().toLocaleString(),
+                sender: 'Admin Tổng'
+            });
+
+            saveState();
+            showToast('Đã gửi thư thành công!');
+            document.getElementById('dm-recipient').value = '';
+            document.getElementById('dm-title').value = '';
+            document.getElementById('dm-content').value = '';
+        }
+
+
+        // --- 9. ĐĂNG NHẬP / ĐĂNG KÝ MODAL & TABS ---
+        function openLoginModal() {
+            openModal(`
+                <h3 class="text-xl font-black text-white mb-2 text-center">ĐĂNG NHẬP HỆ THỐNG</h3>
+                <p class="text-xs text-zinc-400 mb-6 text-center">Truy cập toàn bộ tính năng độc quyền Freedom Wings</p>
+                <form onsubmit="submitLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên đăng nhập / Gmail</label>
+                        <input type="text" id="login-user" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Username hoặc Gmail...">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold text-zinc-400">Mật khẩu</label>
+                            <button type="button" onclick="togglePasswordVisibility('login-pass', this)" class="text-xs text-gaming-neon font-medium">Hiện</button>
+                        </div>
+                        <input type="password" id="login-pass" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Mật khẩu...">
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span onclick="openForgotModal()" class="text-gaming-neon cursor-pointer hover:underline">Quên mật khẩu?</span>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="w-full py-3 bg-gaming-neon hover:bg-emerald-400 text-black font-extrabold rounded-xl text-sm transition-colors shadow-lg">
+                            Đăng Nhập Ngay
+                        </button>
+                    </div>
+                    <div class="text-center pt-2">
+                        <p class="text-xs text-zinc-400">Chưa có tài khoản? <span onclick="openRegisterModal()" class="text-gaming-neon font-bold cursor-pointer hover:underline">Đăng ký ngay</span></p>
+                    </div>
+                </form>
+            `);
+        }
+
+        function togglePasswordVisibility(fieldId, btnEl) {
+            const field = document.getElementById(fieldId);
+            if (field.type === 'password') {
+                field.type = 'text';
+                btnEl.textContent = 'Ẩn';
+            } else {
+                field.type = 'password';
+                btnEl.textContent = 'Hiện';
+            }
+        }
+
+        function submitLogin(e) {
+            e.preventDefault();
+            const identifier = document.getElementById('login-user').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+
+            const found = dbState.users.find(u => (u.username === identifier || u.email === identifier) && u.password === pass);
+            if (found) {
+                dbState.currentUser = found;
+                saveState();
+                closeModal();
+                showToast(`Đăng nhập thành công! Chào mừng ${found.name || found.username}`);
+                renderAll();
+            } else {
+                showToast('Tên đăng nhập hoặc mật khẩu không chính xác!', 'error');
+            }
+        }
+
+        function openForgotModal() {
+            openModal(`
+                <h3 class="text-lg font-bold text-white mb-2">Khôi Phục Mật Khẩu</h3>
+                <p class="text-xs text-zinc-400 mb-4">Nhập Gmail đã đăng ký để nhận gợi ý mật khẩu.</p>
+                <form onsubmit="submitForgot(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Gmail đăng ký</label>
+                        <input type="email" id="forgot-email" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-3 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nhập gmail...">
+                    </div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="openLoginModal()" class="px-4 py-2 bg-gaming-border text-white text-xs font-bold rounded-xl">Quay lại</button>
+                        <button type="submit" class="px-4 py-2 bg-gaming-neon text-black text-xs font-bold rounded-xl">Gợi ý mật khẩu</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitForgot(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value.trim();
+            const user = dbState.users.find(u => u.email === email);
+            if (user) {
+                showToast(`Gợi ý mật khẩu cho tài khoản ${user.username}: Mật khẩu có độ dài ${user.password.length} ký tự (Bắt đầu bằng ${user.password[0]}...)`);
+                openLoginModal();
+            } else {
+                showToast('Không tìm thấy tài khoản với Gmail này!', 'error');
+            }
+        }
+
+        function openRegisterModal() {
+            openModal(`
+                <h3 class="text-xl font-black text-white mb-2 text-center">ĐĂNG KÝ TÀI KHOẢN</h3>
+                <p class="text-xs text-zinc-400 mb-6 text-center">Tạo tài khoản chính thức tham gia Freedom Wings</p>
+                <form onsubmit="submitRegister(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Tên đăng nhập (Username)</label>
+                        <input type="text" id="reg-user" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Không trùng lặp...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Gmail (Bắt buộc định dạng Google Gmail)</label>
+                        <input type="email" id="reg-email" required class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="...@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Mật khẩu (Tối thiểu 8 ký tự)</label>
+                        <input type="password" id="reg-pass" required minlength="8" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Mật khẩu 8+ ký tự...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Xác nhận mật khẩu</label>
+                        <input type="password" id="reg-pass2" required minlength="8" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="Nhập lại mật khẩu...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-zinc-400 mb-1">Gợi ý mật khẩu (Hint)</label>
+                        <input type="text" id="reg-hint" class="w-full bg-gaming-dark border border-gaming-border rounded-xl px-4 py-2.5 text-white text-sm focus:border-gaming-neon outline-none" placeholder="VD: Tên thú cưng + năm sinh">
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="w-full py-3 bg-gaming-neon hover:bg-emerald-400 text-black font-extrabold rounded-xl text-sm transition-colors shadow-lg">
+                            Đăng Ký Ngay
+                        </button>
+                    </div>
+                    <div class="text-center pt-1">
+                        <p class="text-xs text-zinc-400">Đã có tài khoản? <span onclick="openLoginModal()" class="text-gaming-neon font-bold cursor-pointer hover:underline">Đăng nhập</span></p>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitRegister(e) {
+            e.preventDefault();
+            const username = document.getElementById('reg-user').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pass = document.getElementById('reg-pass').value;
+            const pass2 = document.getElementById('reg-pass2').value;
+            const hint = document.getElementById('reg-hint').value;
+
+            if (dbState.users.some(u => u.username === username)) {
+                showToast('Tên đăng nhập đã tồn tại! Vui lòng chọn tên khác.', 'error');
+                return;
+            }
+
+            if (dbState.users.some(u => u.email === email)) {
+                showToast('Gmail này đã được đăng ký tài khoản khác!', 'error');
+                return;
+            }
+
+            if (!email.toLowerCase().endsWith('@gmail.com')) {
+                showToast('Gmail bắt buộc phải là định dạng @gmail.com của Google!', 'error');
+                return;
+            }
+
+            if (pass.length < 8) {
+                showToast('Mật khẩu phải có ít nhất 8 ký tự!', 'error');
+                return;
+            }
+
+            if (pass !== pass2) {
+                showToast('Mật khẩu xác nhận không khớp!', 'error');
+                return;
+            }
+
+            const newUser = {
+                username,
+                password: pass,
+                role: 'THÀNH VIÊN',
+                email,
+                name: username,
+                uid: 'FW-' + Math.floor(1000 + Math.random() * 9000),
+                points: 0,
+                avatar: 'https://placehold.co/150x150/10b981/09090b?text=' + username.substring(0,3).toUpperCase(),
+                hint
+            };
+
+            dbState.users.push(newUser);
+            dbState.currentUser = newUser;
+            saveState();
+            closeModal();
+            showToast('Đăng ký tài khoản thành công!');
+            renderAll();
+        }
+
+        function logout() {
+            dbState.currentUser = null;
+            saveState();
+            showToast('Đã đăng xuất tài khoản.');
+            switchTab('home');
+        }
+
+        // --- RUNTIME INITIALIZATION ---
+        window.onload = function() {
+            loadState();
+            renderAll();
+        };
+    </script>
+</body><!-- Thư viện Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+  // Cấu hình kết nối Firebase của clan Freedom Wings
+  const firebaseConfig = {
+    apiKey: "AIzaSyBo8aksUzb0dR200F4Kag5SyXkoX7EPvuU",
+    authDomain: "freedom-wings-62809.firebaseapp.com",
+    projectId: "freedom-wings-62809",
+    storageBucket: "freedom-wings-62809.firebasestorage.app",
+    messagingSenderId: "240743885290",
+    appId: "1:240743885290:web:28f25956b1cbe6ee536a93"
+  };
+
+  // Khởi tạo Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const db = firebase.database();
+
+  // Biến lưu trữ toàn bộ dữ liệu web (Banners, Tasks, Rewards, Services, v.v.)
+dbState = {
+    banners: [],
+    tasks: [],
+    rewards: [],
+    services: []
+};
+
+// Tự động lắng nghe và đồng bộ toàn bộ dữ liệu thời gian thực từ Firebase
+db.ref('clanState').on('value', (snapshot) => {
+    const serverData = snapshot.val();
+    console.log("Dữ liệu nhận từ Firebase:", serverData); // Dòng này giúp in dữ liệu ra kiểm tra
+    
+    if (serverData) {
+        dbState = serverData; // Cập nhật dữ liệu mới nhất từ server
+        
+        // Gọi hàm vẽ lại giao diện của web bạn
+        if (typeof renderUI === 'function') {
+            renderUI();
+        }
+    } else {
+        console.log("Nhánh clanState trên Firebase đang bị trống hoặc không tồn tại!");
+    }
+});
+        
+        // Nếu có phần notice cũ, vẫn cập nhật được luôn nếu cần:
+        const noticeElement = document.getElementById('clan-notice');
+        if (noticeElement && serverData.notice) {
+            noticeElement.innerText = serverData.notice;
+        }
+     
