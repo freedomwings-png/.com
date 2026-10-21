@@ -2516,7 +2516,7 @@
     firebase.initializeApp(firebaseConfig);
   }
   const db = firebase.database();
-
+ 
   // Biến lưu trữ toàn bộ dữ liệu web (Banners, Tasks, Rewards, Services, v.v.)
 dbState = {
     banners: [],
@@ -2528,7 +2528,7 @@ dbState = {
 // Tự động lắng nghe và đồng bộ toàn bộ dữ liệu thời gian thực từ Firebase
 db.ref('clanState').on('value', (snapshot) => {
     const serverData = snapshot.val();
-    console.log("Dữ liệu nhận từ Firebase:", serverData); // Dòng này giúp in dữ liệu ra kiểm tra
+    console.log("Dữ liệu nhận từ Firebase:", serverData);
     
     if (serverData) {
         dbState = serverData; // Cập nhật dữ liệu mới nhất từ server
@@ -2537,10 +2537,17 @@ db.ref('clanState').on('value', (snapshot) => {
         if (typeof renderUI === 'function') {
             renderUI();
         }
+
+        // Nếu có phần notice cũ, cập nhật an toàn bên trong khối kiểm tra
+        const noticeElement = document.getElementById('clan-notice');
+        if (noticeElement && serverData.notice) {
+            noticeElement.innerText = serverData.notice;
+        }
     } else {
         console.log("Nhánh clanState trên Firebase đang bị trống hoặc không tồn tại!");
     }
 });
+
         
         // Nếu có phần notice cũ, vẫn cập nhật được luôn nếu cần:
         const noticeElement = document.getElementById('clan-notice');
